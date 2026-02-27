@@ -19,6 +19,7 @@ flowchart TD
     L -- COMPLETED --> M[Return cached response]
     L -- IN_FLIGHT --> N[Wait until completed]
     N --> M
+```
 
 2. ## Setup Instructions
 
