@@ -47,3 +47,15 @@ uvicorn main:app --reload
 So the server will run at: http://127.0.0.1:8000
 
 API documentation is available at: http://127.0.0.1:8000/docs
+```
+
+3. ## API Documentation section
+Examples:
+POST /process-payment
+
+Header: Idempotency-Key: test123
+
+Body: {"amount":100,"currency":"GHS"}
+
+Response: "Charged 100 GHS"
+
