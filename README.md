@@ -23,11 +23,11 @@ flowchart TD
 
 2. ## Setup Instructions
 
-### Requirements
+ Requirements
 - Python 3.10+
 - Git
 
-### Clone Repository
+ Clone Repository
 ```powershell
 git clone https://github.com/ksefa00/Idempotency-Gateway.git
 cd Idempotency-Gateway
@@ -48,14 +48,4 @@ So the server will run at: http://127.0.0.1:8000
 
 API documentation is available at: http://127.0.0.1:8000/docs
 ```
-
-3. ## API Documentation section
-Examples:
-POST /process-payment
-
-Header: Idempotency-Key: test123
-
-Body: {"amount":100,"currency":"GHS"}
-
-Response: "Charged 100 GHS"
 
