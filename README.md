@@ -116,3 +116,13 @@ Conflict (Same Key, Different Body)
 
 - Implemented in-flight waiting so concurrent identical requests do not double-process.
 
+## 5. Developer’s Choice: TTL Expiry
+Feature added: Idempotency key expiration.
+
+Why:
+Prevent unbounded memory growth in real-world fintech systems.
+
+How:
+Each record stores a creation timestamp.
+Expired records are cleaned before processing new requests.
+
