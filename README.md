@@ -49,6 +49,7 @@ So the server will run at: http://127.0.0.1:8000
 API documentation is available at: http://127.0.0.1:8000/docs
 ```
 
+
 ## 3. API Documentation
 
 GET /
@@ -61,7 +62,7 @@ Health check endpoint.
   "message": "Idempotency Gateway is running"
 }
 
-POST /process-payment
+##  POST /process-payment
 
 Processes a payment request.
 
@@ -75,7 +76,7 @@ Request Body
   "currency": "GHS"
 }
 
-First Request Response
+## First Request Response
 
 - Status: 201 Created
 
@@ -86,7 +87,7 @@ First Request Response
   "message": "Charged 100.0 GHS"
 }
 
-Duplicate Request Response
+## Duplicate Request Response
 
 - Status: 201 Created
 
@@ -103,4 +104,15 @@ Conflict (Same Key, Different Body)
   "detail": "Idempotency key already used for a different request body."
 }
 ```
+
+## 4. Design Decisions
+- Used in-memory dictionary as allowed by the challenge.
+
+- Used stable JSON hashing to detect payload tampering.
+
+- Stored both response body and status code to ensure exact replay.
+
+- Used async locking to prevent race conditions.
+
+- Implemented in-flight waiting so concurrent identical requests do not double-process.
 
