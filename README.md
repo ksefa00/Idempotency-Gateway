@@ -49,3 +49,58 @@ So the server will run at: http://127.0.0.1:8000
 API documentation is available at: http://127.0.0.1:8000/docs
 ```
 
+## 3. API Documentation
+
+GET /
+
+Health check endpoint.
+
+**Response**
+```json
+{
+  "message": "Idempotency Gateway is running"
+}
+
+POST /process-payment
+
+Processes a payment request.
+
+Header
+
+Idempotency-Key: <unique-string>
+
+Request Body
+{
+  "amount": 100,
+  "currency": "GHS"
+}
+
+First Request Response
+
+- Status: 201 Created
+
+- Header: X-Cache-Hit: false
+
+- Body:
+{
+  "message": "Charged 100.0 GHS"
+}
+
+Duplicate Request Response
+
+- Status: 201 Created
+
+- Header: X-Cache-Hit: true
+
+- Same response body as first request
+
+Conflict (Same Key, Different Body)
+
+- Status: 409 Conflict
+
+- Body:
+{
+  "detail": "Idempotency key already used for a different request body."
+}
+```
+
