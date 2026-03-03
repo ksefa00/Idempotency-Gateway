@@ -48,7 +48,7 @@ async def process_payment(
     payment: PaymentRequest,
     idempotency_key: Optional[str] = Header(default=None, alias="Idempotency-Key"),
 ):
-    # --- Validate header (User Story 1 requirement) ---
+    #  Validate header (User Story 1 requirement) 
     if not idempotency_key or not idempotency_key.strip():
         raise HTTPException(status_code=400, detail="Missing Idempotency-Key header")
 
@@ -56,7 +56,7 @@ async def process_payment(
     body = payment.model_dump()
     req_hash = stable_body_hash(body)
 
-    # --- Critical section: check/create record safely (race-safe) ---
+    #  Critical section: check/create record safely (race-safe) 
     async with STORE_LOCK:
         cleanup_expired_keys()
 
